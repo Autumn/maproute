@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script src="./datamaps.world.min.js"></script>
+<script src="./data.js"></script>
+<script>
+window.onload = function() {
+  var map = new Datamap({
+    element: document.getElementById("map"),
+    projection: 'equirectangular', 
+    fills: {
+      defaultFill: '#ABDDA4',
+      host: 'blue',
+      hop: 'red',
+      dest: 'purple'
+    }
+  });
+
+var test = [
+  {
+    radius: 10,
+    fillKey: 'USA',
+    latitude: 11.415,
+    longitude: 165.1619
+  },{
+    radius: 10,
+    fillKey: 'RUS',
+    latitude: 73.482,
+    longitude: 54.5854
+  }
+]
+
+  map.bubbles(bubbles, {
+    popupTemplate: function(geo, data) {
+      return '<div class="hoverinfo">' + '<strong>Hostname:</strong> ' + data.hostname + '<br/><strong>IP:</strong> ' + data.ip + '<br/><strong>Country:</strong> ' + data.country + '<br/><strong>Region:</strong> ' + data.region + '<br/><strong>City: </strong>' + data.city + '</div>'
+    }
+  });
+
+  map.arc(arcs, {strokeWidth: 1, arcSharpness: 0.5});
+}
+</script>
+</head>
+<body>
+<div id="map"></div>
+</body>
+</html>

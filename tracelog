@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# ips only
+# tracepath -b $1 | sed -r 's/^\s?[0-9]+:\s+//' | cut -f 1 -d' ' | sed '/^$/d'
+
+# ip + hostname
+tracepath -b $1 | sed -r 's/ ?[0-9]+: +//' | sed -r 's/(.+)\s\(([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\)/\1 \2/' | cut -f 1,2 -d' ' | sed 's/^ $//' | sed '/^$/d'
+
